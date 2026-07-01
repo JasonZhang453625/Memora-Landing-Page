@@ -1,0 +1,22 @@
+# build output
+dist/
+
+# dependencies
+node_modules/
+
+# Astro dev cache
+.astro/
+
+# local env
+.env
+.env.local
+
+# debug logs
+*.log
+
+# APK (local copy — download links point to GitHub Releases)
+public/downloads/
+
+# OS files
+.DS_Store
+Thumbs.db

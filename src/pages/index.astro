@@ -1,0 +1,492 @@
+---
+import '../styles/global.css';
+import {
+  Apple,
+  Archive,
+  ArrowDownToLine,
+  ArrowRight,
+  Bot,
+  Boxes,
+  BrainCircuit,
+  CheckCircle2,
+  Compass,
+  Database,
+  FileText,
+  FolderOpen,
+  Globe2,
+  KeyRound,
+  Library,
+  LockKeyhole,
+  MessageSquareText,
+  Network,
+  Search,
+  Send,
+  ShieldCheck,
+  Sparkles,
+  Tags,
+  Workflow,
+} from '@lucide/astro';
+
+const downloadUrl = 'https://github.com/JasonZhang453625/Article-Hub/releases/download/v2.0.10/app-release.apk';
+const productName = '记忆海';
+const productNameEn = 'Memora';
+
+const notes = [
+  {
+    source: 'Web',
+    color: '#00AEEF',
+    time: '7h ago',
+    title: 'Attention Is All You Need',
+    body: '只提取关键观点、标签与原文入口，压缩成可再次召回的记忆单元。',
+  },
+  {
+    source: 'X',
+    color: '#0F172A',
+    time: 'just now',
+    title: 'X 平台讨论：本地 AI 记忆流',
+    body: '从一条链接进入记忆海，自动完成知识化、标签与本地索引。',
+  },
+  {
+    source: 'WeChat',
+    color: '#09B83E',
+    time: '2d ago',
+    title: '端侧索引与个人记忆资产',
+    body: '保存后先落地，再处理；失败也会留在进程页等待重试，不丢记忆。',
+  },
+  {
+    source: 'Bilibili',
+    color: '#FB7299',
+    time: '1d ago',
+    title: '长视频观点如何变成知识卡片',
+    body: '把分散内容变成高密度知识颗粒，后续可以直接联想检索。',
+  },
+  {
+    source: 'Rednote',
+    color: '#FF355D',
+    time: '3h ago',
+    title: '个人记忆如何被整理',
+    body: '弱结构自动完成，强结构仍保留给用户控制。',
+  },
+  {
+    source: 'YouTube',
+    color: '#FF0033',
+    time: '5h ago',
+    title: 'AI Agents 研究清单',
+    body: '每个回答都必须回到真实卡片和原文入口。',
+  },
+  {
+    source: 'ChatGPT',
+    color: '#10A37F',
+    time: '4d ago',
+    title: 'OKF 是什么？',
+    body: '导出的记忆包可被其他 Memora 实例或外部 Agent 消费。',
+  },
+  {
+    source: 'Zhihu',
+    color: '#1677FF',
+    time: '6d ago',
+    title: '为什么收藏很少被再次使用',
+    body: '语义召回解决只记得概念、不记得标题的问题。',
+  },
+  {
+    source: 'Reddit',
+    color: '#FF5700',
+    time: '9d ago',
+    title: 'Local-first memory tools',
+    body: '数据、索引和处理状态保存在设备本地，AI 请求直连用户服务。',
+  },
+  {
+    source: 'PDF',
+    color: '#7C8A98',
+    time: 'soon',
+    title: '研究资料与原文追溯',
+    body: '记忆卡片不是事实终点，原文始终保留用于核实。',
+  },
+];
+
+const flow = [
+  { icon: Send, title: '一键分享', text: '微信、知乎、Bilibili、小红书、X、YouTube 等来源统一进入。' },
+  { icon: Sparkles, title: '仿生提取', text: '过滤平台噪声，只保留标题、关键观点、标签与原文入口。' },
+  { icon: Database, title: '本地记忆', text: '知识卡片、标签、索引和处理状态保存在设备本地。' },
+  { icon: FileText, title: '追溯原文', text: '每次回答都能回到引用知识卡片和原始页面。' },
+];
+
+const libraryLines = [
+  { icon: Search, text: '标题、标签、摘要和来源统一搜索' },
+  { icon: FolderOpen, text: '文件夹、嵌套文件夹和来源筛选保留手动控制' },
+  { icon: Workflow, text: '处理失败进入进程页，不丢失已保存链接' },
+  { icon: ShieldCheck, text: 'API Key 不进入备份，索引可重建' },
+];
+
+const chatLines = [
+  '先从本地索引召回相关摘要',
+  '模型只基于候选摘要回答',
+  '引用编号映射回真实 articleId',
+  '信息不足时明确拒绝编造',
+];
+
+const differentiators = [
+  {
+    icon: Globe2,
+    title: '跨平台低摩擦收集',
+    body: '从微信、小红书、知乎、Bilibili、X、YouTube 和普通网页直接接收链接。',
+  },
+  {
+    icon: Library,
+    title: '仿生记忆提取',
+    body: '不是保存整页噪声，而是提取标题、关键观点、标签和原文入口。',
+  },
+  {
+    icon: BrainCircuit,
+    title: '联想式全库召回',
+    body: '不要求先创建资料集，直接向全部已知识化内容提问。',
+  },
+  {
+    icon: LockKeyhole,
+    title: '本地优先与 BYOK',
+    body: '核心数据在本机，AI 请求直连用户配置的 OpenAI-compatible 服务。',
+  },
+  {
+    icon: Network,
+    title: 'Agent-friendly 记忆包',
+    body: '导出的记忆卡片可迁移、可分享，也可被外部 AI Agent 直接消费。',
+  },
+];
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="记忆海 Memora 是本地优先的仿生记忆提取工具：一键分享即知识化，对话即联想检索，原文始终可追溯。"
+    />
+    <link rel="icon" type="image/png" href="images/article-hub-icon.png" />
+    <title>记忆海 Memora | 本地优先的仿生记忆提取工具</title>
+  </head>
+  <body>
+    <div class="page-shell">
+      <canvas class="sea-canvas" id="sea-currents" aria-hidden="true"></canvas>
+      <div class="paper-grain" aria-hidden="true"></div>
+      <div class="topographic-field" aria-hidden="true"></div>
+
+      <header class="site-header">
+        <nav class="nav-shell" aria-label="主导航">
+          <a class="brand-link" href="#top" aria-label="记忆海 Memora 首页">
+            <img class="brand-mark" src="images/article-hub-icon.png" alt="" />
+            <span>{productNameEn}</span>
+          </a>
+          <div class="header-actions">
+            <a class="btn btn-primary" href={downloadUrl} target="_blank" rel="noreferrer">
+              <ArrowDownToLine size={18} strokeWidth={2.2} />
+              下载
+            </a>
+          </div>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="section hero scroll-panel" data-scroll-section>
+          <div class="hero-layout">
+            <div class="hero-copy-block reveal">
+              <div class="eyebrow">Bionic memory extraction</div>
+              <h1 class="hero-title">
+                <span>{productName}</span>
+                <span>{productNameEn}</span>
+                <span>只记该记的，随时想得起。</span>
+              </h1>
+              <p class="hero-copy">
+                人类记忆不靠全量保存，而是过滤噪声、提取结构、通过联想唤起。记忆海把微信、知乎、Bilibili、小红书、X、YouTube 和全网内容转成高密度知识卡片，建立本地索引，并用带引用的对话帮你再次召回。
+              </p>
+            </div>
+
+            <div class="wheel-stage reveal" aria-label="滚筒式知识卡片动画">
+              <div class="wheel-label">
+                <span>Knowledge current</span>
+                <span>infinite recall</span>
+              </div>
+              <div class="wheel-shell">
+                <div class="axis-line" aria-hidden="true"></div>
+                <div class="wheel-glass-rim" aria-hidden="true"></div>
+                <div class="wheel-ring">
+                  {notes.map((note, index) => (
+                    <article class="wheel-card" style={`--i:${index}; --count:${notes.length};`}>
+                      <div class="card-meta">
+                        <span class="source-chip">
+                          <span class="source-dot" style={`background:${note.color}`}></span>
+                          {note.source}
+                        </span>
+                        <span>{note.time}</span>
+                      </div>
+                      <h3>{note.title}</h3>
+                      <p>{note.body}</p>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flow-strip reveal" aria-label="记忆海工作流">
+            {flow.map(({ icon: Icon, title, text }) => (
+              <div class="flow-step">
+                <Icon aria-hidden="true" strokeWidth={2} />
+                <strong>{title}</strong>
+                <span>{text}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section class="story-band dark scroll-panel" id="library" data-scroll-section>
+          <div class="section story-grid">
+            <div class="story-copy-block reveal">
+              <div class="section-kicker">1 | Memory cards, not bookmarks</div>
+              <h2 class="story-title">知识库不是收藏夹，是经过提取的个人记忆。</h2>
+              <p class="story-copy">
+                所有保存过的链接都会先可靠落地，再被转成统一知识卡片。记忆海不追求保存整页噪声，而是提取标题、关键观点、标签和原文入口，把松散网页压缩成可浏览、可检索、可被 Agent 调用的记忆单元。
+              </p>
+              <div class="feature-lines">
+                {libraryLines.map(({ icon: Icon, text }) => (
+                  <div class="feature-line">
+                    <span>{text}</span>
+                    <Icon size={20} strokeWidth={2} aria-hidden="true" />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <figure class="phone-frame dark-phone reveal">
+              <img src="images/app-knowledge.jpg" alt="记忆海知识库界面截图，展示搜索、来源筛选和知识卡片列表。" />
+            </figure>
+            <aside class="side-note reveal" aria-label="知识库特性">
+              <span>Your memory</span>
+              <span>Your rules</span>
+              <span>Your knowledge, compressed.</span>
+            </aside>
+          </div>
+        </section>
+
+        <section class="light-section scroll-panel" id="chat" data-scroll-section>
+          <div class="section story-grid reverse">
+            <figure class="phone-frame reveal">
+              <img src="images/app-chat.jpg" alt="记忆海对话界面截图，展示带引用的 AI 回答和知识卡片来源。" />
+            </figure>
+            <div class="story-copy-block reveal">
+              <div class="section-kicker">2 | Recall by association</div>
+              <h2 class="story-title">从翻找，变成通过联想召回。</h2>
+              <p class="story-copy">
+                你不需要记住“保存在哪”，只需要知道自己“学过这个”。记忆海先从本地索引召回相关摘要，再让你配置的模型基于候选卡片回答。每个答案都带引用，继续点开就能回到原文。
+              </p>
+              <div class="feature-lines">
+                {chatLines.map((line) => (
+                  <div class="feature-line">
+                    <span>{line}</span>
+                    <CheckCircle2 size={20} strokeWidth={2} aria-hidden="true" />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <aside class="side-note light-note reveal" aria-label="对话特性">
+              <span>Trace every answer.</span>
+              <span>Recall by meaning.</span>
+              <span>Go back to source.</span>
+            </aside>
+          </div>
+        </section>
+
+        <section class="section differentiators scroll-panel" id="trust" data-scroll-section>
+          <div class="section-heading reveal">
+            <h2>不是保存更多，而是让保存过的内容再次被想起。</h2>
+            <p>
+              记忆海的差异点不是单个 AI 摘要按钮，而是从低摩擦收集、仿生记忆提取、本地索引、联想式对话到原文追溯的完整闭环。
+            </p>
+          </div>
+          <div class="diff-grid reveal">
+            {differentiators.map(({ icon: Icon, title, body }) => (
+              <article class="diff-item">
+                <Icon aria-hidden="true" strokeWidth={2} />
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="download-band scroll-panel" id="download" data-scroll-section>
+          <div class="section download-layout">
+            <div class="reveal">
+              <div class="section-kicker">Download</div>
+              <h2>把你的个人记忆留在自己手里。</h2>
+              <p>
+                当前页面提供 Android APK 下载入口。记忆海不提供自有内容后端或 AI 代理后端；知识卡片、标签、文件夹、处理状态和向量索引优先留在本机。
+              </p>
+            </div>
+            <div class="download-cards reveal">
+              <a class="download-card" href={downloadUrl} target="_blank" rel="noreferrer">
+                <span class="download-icon"><ArrowDownToLine size={22} strokeWidth={2.2} /></span>
+                <span>
+                  <strong>Android APK</strong>
+                  <span>Memora 2.0.10 · GitHub Release 下载</span>
+                </span>
+                <ArrowRight size={20} strokeWidth={2.2} aria-hidden="true" />
+              </a>
+              <div class="download-card disabled" aria-disabled="true">
+                <span class="download-icon"><Apple size={22} strokeWidth={2.2} /></span>
+                <span>
+                  <strong>iOS / TestFlight</strong>
+                  <span>分享入口完善后开放</span>
+                </span>
+                <span>Pending</span>
+              </div>
+              <div class="download-card disabled" aria-disabled="true">
+                <span class="download-icon"><Boxes size={22} strokeWidth={2.2} /></span>
+                <span>
+                  <strong>Desktop builds</strong>
+                  <span>Windows / macOS / Web 工程保留</span>
+                </span>
+                <span>Later</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <strong>{productName} / {productNameEn}</strong> · 一键分享即知识化，对话即联想检索，原文始终可追溯。
+      </footer>
+    </div>
+
+    <script>
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.14 }
+      );
+
+      document.querySelectorAll('.reveal').forEach((node) => revealObserver.observe(node));
+
+      const scrollSections = Array.from(document.querySelectorAll('[data-scroll-section]'));
+      const siteHeader = document.querySelector('.site-header');
+      let scrollLocked = false;
+
+      const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+      const headerOffset = () => siteHeader?.getBoundingClientRect().height ?? 0;
+      const sectionTop = (section) => section.getBoundingClientRect().top + window.scrollY - headerOffset();
+
+      const nearestSectionIndex = () => {
+        let nearestIndex = 0;
+        let nearestDistance = Number.POSITIVE_INFINITY;
+
+        scrollSections.forEach((section, index) => {
+          const distance = Math.abs(sectionTop(section) - window.scrollY);
+          if (distance < nearestDistance) {
+            nearestDistance = distance;
+            nearestIndex = index;
+          }
+        });
+
+        return nearestIndex;
+      };
+
+      const goToSection = (index) => {
+        const nextIndex = clamp(index, 0, scrollSections.length - 1);
+        const nextSection = scrollSections[nextIndex];
+        if (!nextSection) return;
+
+        scrollLocked = true;
+        window.scrollTo({
+          top: Math.max(0, sectionTop(nextSection)),
+          behavior: reducedMotion ? 'auto' : 'smooth',
+        });
+
+        window.setTimeout(() => {
+          scrollLocked = false;
+        }, reducedMotion ? 160 : 920);
+      };
+
+      window.addEventListener(
+        'wheel',
+        (event) => {
+          if (event.ctrlKey || Math.abs(event.deltaY) < 8 || scrollSections.length < 2) return;
+          event.preventDefault();
+          if (scrollLocked) return;
+
+          const direction = event.deltaY > 0 ? 1 : -1;
+          const currentIndex = nearestSectionIndex();
+          goToSection(currentIndex + direction);
+        },
+        { passive: false }
+      );
+
+      const canvas = document.querySelector('#sea-currents');
+      const ctx = canvas?.getContext('2d');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let width = 0;
+      let height = 0;
+      let raf = 0;
+      let t = 0;
+
+      const resizeCanvas = () => {
+        if (!canvas || !ctx) return;
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.round(width * ratio);
+        canvas.height = Math.round(height * ratio);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      };
+
+      const drawCurrents = () => {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, width, height);
+        ctx.lineWidth = 1;
+        ctx.globalAlpha = 0.42;
+
+        for (let band = 0; band < 12; band += 1) {
+          const yBase = (height / 11) * band + Math.sin(t * 0.01 + band) * 14;
+          ctx.beginPath();
+          for (let x = -60; x <= width + 60; x += 18) {
+            const y =
+              yBase +
+              Math.sin(x * 0.008 + band * 0.9 + t * 0.012) * 22 +
+              Math.cos(x * 0.018 + band + t * 0.008) * 9;
+            if (x === -60) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.strokeStyle = band % 2 ? 'rgba(0, 174, 239, 0.24)' : 'rgba(16, 39, 63, 0.18)';
+          ctx.stroke();
+        }
+
+        ctx.globalAlpha = 0.28;
+        for (let i = 0; i < 42; i += 1) {
+          const x = (i * 97 + t * 0.28) % (width + 160) - 80;
+          const y = (Math.sin(i * 3.2 + t * 0.012) * 0.5 + 0.5) * height;
+          ctx.beginPath();
+          ctx.arc(x, y, i % 4 === 0 ? 1.8 : 1.1, 0, Math.PI * 2);
+          ctx.fillStyle = i % 3 === 0 ? 'rgba(0, 174, 239, 0.44)' : 'rgba(16, 39, 63, 0.28)';
+          ctx.fill();
+        }
+
+        t += 1;
+        if (!reducedMotion) raf = requestAnimationFrame(drawCurrents);
+      };
+
+      resizeCanvas();
+      drawCurrents();
+      window.addEventListener('resize', () => {
+        cancelAnimationFrame(raf);
+        resizeCanvas();
+        drawCurrents();
+      });
+    </script>
+  </body>
+</html>
