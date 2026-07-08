@@ -133,6 +133,7 @@ img {
   width: 38px;
   height: 38px;
   border-radius: 10px;
+  object-fit: contain;
   box-shadow: 0 16px 36px rgba(0, 174, 239, 0.2);
 }
 
@@ -242,6 +243,10 @@ img {
   display: block;
 }
 
+.mobile-only-break {
+  display: none;
+}
+
 .hero-copy {
   max-width: 510px;
   margin: 28px 0 0;
@@ -308,13 +313,13 @@ img {
 
 .wheel-card {
   --count: 10;
-  --depth: 246px;
+  --depth: 218px;
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 330px;
-  min-height: 148px;
-  padding: 18px;
+  width: 306px;
+  min-height: 122px;
+  padding: 14px 15px;
   border: 1px solid rgba(255, 255, 255, 0.78);
   border-radius: 18px;
   background:
@@ -344,10 +349,10 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 8px;
   color: rgba(74, 102, 120, 0.94);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
 }
 
@@ -366,18 +371,18 @@ img {
 }
 
 .wheel-card h3 {
-  margin: 0 0 10px;
+  margin: 0 0 7px;
   color: var(--deep-sea);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 800;
-  line-height: 1.25;
+  line-height: 1.18;
 }
 
 .wheel-card p {
   margin: 0;
   color: rgba(16, 39, 63, 0.7);
-  font-size: 13px;
-  line-height: 1.55;
+  font-size: 12px;
+  line-height: 1.42;
 }
 
 .wheel-glass-rim,
@@ -852,6 +857,10 @@ img {
     line-height: 1.02;
   }
 
+  .mobile-only-break {
+    display: block;
+  }
+
   .hero-copy,
   .story-copy,
   .section-heading p,
@@ -891,18 +900,18 @@ img {
   }
 
   .wheel-card {
-    --depth: 178px;
-    width: 280px;
-    min-height: 128px;
-    padding: 14px;
+    --depth: 160px;
+    width: 260px;
+    min-height: 112px;
+    padding: 12px;
   }
 
   .wheel-card h3 {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .wheel-card p {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .wheel-glass-rim,

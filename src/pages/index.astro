@@ -27,7 +27,7 @@ import {
   Workflow,
 } from '@lucide/astro';
 
-const downloadUrl = 'https://github.com/JasonZhang453625/Article-Hub/releases/download/v2.0.10/app-release.apk';
+const downloadUrl = 'https://github.com/JasonZhang453625/Article-Hub/releases/download/v2.0.14/app-release.apk';
 const productName = '记忆海';
 const productNameEn = 'Memora';
 
@@ -163,7 +163,7 @@ const differentiators = [
       name="description"
       content="记忆海 Memora 是本地优先的仿生记忆提取工具：一键分享即知识化，对话即联想检索，原文始终可追溯。"
     />
-    <link rel="icon" type="image/png" href="images/article-hub-icon.png" />
+    <link rel="icon" type="image/png" href="images/memora-icon.png" />
     <title>记忆海 Memora | 本地优先的仿生记忆提取工具</title>
   </head>
   <body>
@@ -175,7 +175,7 @@ const differentiators = [
       <header class="site-header">
         <nav class="nav-shell" aria-label="主导航">
           <a class="brand-link" href="#top" aria-label="记忆海 Memora 首页">
-            <img class="brand-mark" src="images/article-hub-icon.png" alt="" />
+            <img class="brand-mark" src="images/memora-icon.png" alt="" />
             <span>{productNameEn}</span>
           </a>
           <div class="header-actions">
@@ -195,7 +195,7 @@ const differentiators = [
               <h1 class="hero-title">
                 <span>{productName}</span>
                 <span>{productNameEn}</span>
-                <span>只记该记的，随时想得起。</span>
+                <span>只记该记的，<br class="mobile-only-break" />随时想得起。</span>
               </h1>
               <p class="hero-copy">
                 人类记忆不靠全量保存，而是过滤噪声、提取结构、通过联想唤起。记忆海把微信、知乎、Bilibili、小红书、X、YouTube 和全网内容转成高密度知识卡片，建立本地索引，并用带引用的对话帮你再次召回。
@@ -327,7 +327,7 @@ const differentiators = [
                 <span class="download-icon"><ArrowDownToLine size={22} strokeWidth={2.2} /></span>
                 <span>
                   <strong>Android APK</strong>
-                  <span>Memora 2.0.10 · GitHub Release 下载</span>
+                  <span>Memora 2.0.14 · GitHub Release 下载</span>
                 </span>
                 <ArrowRight size={20} strokeWidth={2.2} aria-hidden="true" />
               </a>
